@@ -8,3 +8,6 @@ CREATE TABLE IF NOT EXISTS signups (
 );
 
 CREATE INDEX IF NOT EXISTS signups_email_idx ON signups (email);
+
+-- ?? API(service_role)? ????? RLS ????
+ALTER TABLE signups DISABLE ROW LEVEL SECURITY;
