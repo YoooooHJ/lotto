@@ -142,5 +142,23 @@ function handleReset() {
   resetBtn.disabled = true;
 }
 
+async function applyRecommendedNumbers(result) {
+  if (isDrawing || !result?.main?.length) return;
+  isDrawing = true;
+  drawBtn.disabled = true;
+  resetBtn.disabled = true;
+
+  resetBalls(mainBallsEl, MAIN_COUNT);
+  resetBalls(bonusBallsEl, 1, true);
+  await revealNumbers(result);
+  addToHistory(result);
+
+  isDrawing = false;
+  drawBtn.disabled = false;
+  resetBtn.disabled = false;
+}
+
+window.LottoApp = { applyRecommendedNumbers };
+
 drawBtn.addEventListener("click", handleDraw);
 resetBtn.addEventListener("click", handleReset);
