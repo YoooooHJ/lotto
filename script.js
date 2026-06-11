@@ -131,7 +131,9 @@ async function handleDraw() {
   drawBtn.classList.remove("drawing");
   resetBtn.disabled = false;
 
-  window.SignupModal?.showAfterDraw();
+  setTimeout(() => {
+    window.SignupModal?.showAfterDraw();
+  }, 400);
 }
 
 function handleReset() {
@@ -159,7 +161,9 @@ async function applyRecommendedNumbers(result) {
   drawBtn.disabled = false;
   resetBtn.disabled = false;
 
-  window.SignupModal?.showAfterDraw();
+  setTimeout(() => {
+    window.SignupModal?.showAfterDraw();
+  }, 400);
 }
 
 window.LottoApp = { applyRecommendedNumbers };

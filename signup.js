@@ -1,5 +1,4 @@
 const STORAGE_KEY = "lottoSignedUp";
-const SESSION_DISMISS_KEY = "lottoSignupDismissed";
 
 const signupModal = document.getElementById("signupModal");
 const signupForm = document.getElementById("signupForm");
@@ -13,28 +12,25 @@ function isSignedUp() {
   return localStorage.getItem(STORAGE_KEY) === "true";
 }
 
-function isDismissedThisSession() {
-  return sessionStorage.getItem(SESSION_DISMISS_KEY) === "true";
-}
-
 function openSignupModal() {
-  if (isSignedUp() || isDismissedThisSession()) return;
+  if (isSignedUp()) return;
 
   signupMessage.textContent = "";
   signupMessage.className = "signup-message";
   signupForm.hidden = false;
-  signupModal.hidden = false;
+  signupModal.classList.add("is-open");
+  signupModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
   signupNameInput.focus();
 }
 
 function closeSignupModal() {
-  signupModal.hidden = true;
+  signupModal.classList.remove("is-open");
+  signupModal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
 }
 
 function dismissSignupModal() {
-  sessionStorage.setItem(SESSION_DISMISS_KEY, "true");
   closeSignupModal();
 }
 
@@ -71,15 +67,12 @@ async function handleSignupSubmit(event) {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "??? ??????.");
+      throw new Error(data.error || data.detail || "??? ??????.");
     }
 
     localStorage.setItem(STORAGE_KEY, "true");
-    signupMessage.textContent = data.message;
-    signupMessage.className = "signup-message signup-message-success";
-    signupForm.hidden = true;
-
-    setTimeout(closeSignupModal, 1800);
+    closeSignupModal();
+    alert("?? ??");
   } catch (error) {
     signupMessage.textContent = error.message || "??? ??????. ?? ??? ???.";
     signupMessage.className = "signup-message signup-message-error";
@@ -98,7 +91,7 @@ signupModal.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !signupModal.hidden) {
+  if (event.key === "Escape" && signupModal.classList.contains("is-open")) {
     dismissSignupModal();
   }
 });

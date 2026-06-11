@@ -802,15 +802,15 @@ body.modal-open {
   position: fixed;
   inset: 0;
   z-index: 200;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: var(--spacing-lg);
   background: rgba(0, 0, 0, 0.6);
 }
 
-.modal-overlay[hidden] {
-  display: none;
+.modal-overlay.is-open {
+  display: flex;
 }
 
 .modal-dialog {

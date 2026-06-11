@@ -25,7 +25,8 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Supabase ????? ???? ?????." });
   }
 
-  const { name, email } = req.body || {};
+  const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
+  const { name, email } = body;
   const trimmedName = typeof name === "string" ? name.trim() : "";
   const trimmedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
 
@@ -40,7 +41,7 @@ export default async function handler(req, res) {
   try {
     const signup = await createSignup(trimmedName, trimmedEmail);
     return res.status(201).json({
-      message: "??? ???????. AI ?? ?? ?? ??? ???? ??????.",
+      message: "??? ???????.",
       signup,
     });
   } catch (error) {
@@ -48,6 +49,9 @@ export default async function handler(req, res) {
       return res.status(409).json({ error: "?? ??? ??????." });
     }
 
-    return res.status(500).json({ error: "?? ?? ? ??? ??????.", detail: error.message });
+    return res.status(500).json({
+      error: "?? ?? ? ??? ??????.",
+      detail: error.message,
+    });
   }
 }
