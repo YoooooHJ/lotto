@@ -794,6 +794,101 @@ body {
   outline-offset: 2px;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 480px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--rounded-lg);
+  padding: var(--spacing-xl);
+  text-align: left;
+  box-shadow: var(--shadow-soft);
+}
+
+.modal-eyebrow {
+  margin-bottom: var(--spacing-sm);
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.modal-desc {
+  font-size: 16px;
+  font-weight: 400;
+  font-variation-settings: "wght" 330;
+  line-height: 1.45;
+  letter-spacing: -0.14px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.signup-form[hidden] {
+  display: none;
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xs);
+}
+
+.modal-actions .btn-primary,
+.modal-actions .btn-secondary {
+  flex: 1;
+  min-width: 120px;
+}
+
+.signup-message {
+  min-height: 1.25rem;
+  font-size: 14px;
+  font-weight: 400;
+  font-variation-settings: "wght" 330;
+  line-height: 1.45;
+  margin-bottom: var(--spacing-sm);
+}
+
+.signup-message:empty {
+  display: none;
+}
+
+.signup-message-success {
+  color: var(--semantic-success);
+}
+
+.signup-message-error {
+  color: var(--ink);
+}
+
 @media (max-width: 960px) {
   .top-nav-inner,
   .page {
@@ -835,6 +930,15 @@ body {
   }
 
   .chat-send-btn {
+    width: 100%;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions .btn-primary,
+  .modal-actions .btn-secondary {
     width: 100%;
   }
 
