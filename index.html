@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로또 번호 추첨기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,320..700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <span class="top-nav-brand">Lotto</span>
+      <span class="top-nav-title">번호 추첨기</span>
+    </div>
+  </header>
+
+  <div class="marquee-strip" aria-hidden="true">
+    <span>1~45 · 6+1 · 무작위 추첨 · 역대 당첨번호</span>
+  </div>
+
+  <main class="page">
+    <section class="section-hero">
+      <p class="eyebrow">Lotto Tool</p>
+      <h1 class="hero-title">로또 번호<br>추첨기</h1>
+      <p class="hero-lead">1~45 중 6개 번호와 보너스 번호 1개를 무작위로 추첨합니다.</p>
+    </section>
+
+    <section class="color-block color-block-lime draw-block">
+      <p class="eyebrow">Draw</p>
+      <h2 class="block-headline">당첨 번호</h2>
+
+      <div class="balls main-balls" id="mainBalls" aria-live="polite">
+        <div class="ball placeholder" data-index="0">?</div>
+        <div class="ball placeholder" data-index="1">?</div>
+        <div class="ball placeholder" data-index="2">?</div>
+        <div class="ball placeholder" data-index="3">?</div>
+        <div class="ball placeholder" data-index="4">?</div>
+        <div class="ball placeholder" data-index="5">?</div>
+      </div>
+
+      <div class="bonus-row">
+        <span class="bonus-label">보너스</span>
+        <div class="balls bonus-balls" id="bonusBalls" aria-live="polite">
+          <div class="ball placeholder bonus" data-index="0">?</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="drawBtn" type="button">
+          <span class="btn-text">번호 추첨하기</span>
+        </button>
+        <button class="btn btn-secondary" id="resetBtn" type="button" disabled>초기화</button>
+      </div>
+
+      <section class="history-section" id="historySection" hidden>
+        <h3 class="history-title">추첨 기록</h3>
+        <ul class="history-list" id="historyList"></ul>
+      </section>
+    </section>
+
+    <section class="section-spacer" aria-hidden="true"></section>
+
+    <section class="section-data" id="winningSection">
+      <div class="pricing-card winning-card">
+        <p class="eyebrow">Archive</p>
+        <h2 class="card-title">역대 1등 당첨번호</h2>
+        <p class="winning-meta" id="winningMeta"></p>
+
+        <div class="winning-controls">
+          <div class="field field-grow">
+            <label class="field-label" for="winningSearch">회차 검색</label>
+            <input class="text-input" type="search" id="winningSearch" placeholder="회차 번호 검색 (예: 1000)" autocomplete="off">
+          </div>
+          <div class="field">
+            <label class="field-label" for="pageSize">표시 개수</label>
+            <select class="text-input select-input" id="pageSize">
+              <option value="20">20개</option>
+              <option value="50" selected>50개</option>
+              <option value="100">100개</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="winning-table">
+            <thead>
+              <tr>
+                <th scope="col">회차</th>
+                <th scope="col">추첨일</th>
+                <th scope="col">당첨번호</th>
+                <th scope="col">보너스</th>
+              </tr>
+            </thead>
+            <tbody id="winningTableBody"></tbody>
+          </table>
+        </div>
+
+        <nav class="pagination" id="pagination" aria-label="당첨번호 페이지"></nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="caption footer-caption">Disclaimer</p>
+    <p class="footer-note">※ 본 추첨기는 참고용이며, 실제 당첨을 보장하지 않습니다.</p>
+    <p class="data-source">
+      데이터 출처: <a class="text-link" href="https://github.com/smok95/lotto" target="_blank" rel="noopener noreferrer">smok95/lotto</a> 오픈데이터 (동행복권 추첨결과 기반)
+    </p>
+  </footer>
+
+  <script src="winning-data.js"></script>
+  <script src="script.js"></script>
+  <script src="winning-history.js"></script>
+</body>
+</html>
